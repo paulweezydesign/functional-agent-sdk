@@ -1,12 +1,23 @@
 {
-  "name": "functional-agent-sdk",
+  "name": "functional-openai-agent-sdk",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test",
+    "dev": "node --watch index.js"
   },
-  "keywords": [],
+  "keywords": ["openai", "agents", "functional", "sdk", "composable"],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "MIT",
+  "description": "A functional JavaScript implementation of an agent SDK inspired by OpenAI's design",
+  "dependencies": {
+    "openai": "^4.52.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
