@@ -1,12 +1,30 @@
 {
   "name": "functional-agent-sdk",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.json",
+    "dev": "node -r dotenv/config --watch dist/examples/basic.js",
+    "example": "node -r dotenv/config dist/examples/basic.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "nanoid": "^5.1.5",
+    "openai": "^5.12.2",
+    "pino": "^9.9.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
 }
