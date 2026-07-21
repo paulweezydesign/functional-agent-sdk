@@ -9,7 +9,7 @@
     "example": "node -r dotenv/config dist/examples/basic.js",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "keywords": [],
+  "keywords": ["openai", "agent", "functional", "sdk"],
   "author": "",
   "license": "ISC",
   "description": "",
