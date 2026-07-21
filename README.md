@@ -1,44 +1,36 @@
-# Functional Agent SDK (JavaScript)
+# Functional Agent SDK (JavaScript / TypeScript)
 
-A tiny functional layer atop the official `openai` JavaScript client. It embraces:
+Composable, functional agent primitives with an OpenAI provider.
 
-* Pure functions over classes
-* Composable middleware pipeline (inspired by Koa / Redux)
-* Modern ECMAScript modules (ESM)
-
-## Quick Start
+## Install
 
 ```bash
-npm install functional-agent-sdk openai dotenv
+npm i
 ```
 
-```js
-import { createAgent } from 'functional-agent-sdk';
-import { logger } from 'functional-agent-sdk/lib/middleware.js';
+Copy `.env.example` to `.env` and set `OPENAI_API_KEY`.
 
-const run = createAgent({
-  model: 'gpt-4o',
-  middlewares: [logger()],
-});
+## Build and run example
 
-const response = await run([
-  { role: 'user', content: 'Hello! How are you?' },
-]);
-
-console.log(response.content);
+```bash
+npm run build
+npm run example
 ```
 
-## Middleware Pattern
+## Core ideas
+- Pure functions and middlewares compose via `compose(...)`
+- Providers expose a `generate` function compatible with `createAgent`
+- Tools and memory are opt-in middlewares
 
-A middleware is just a higher-order async function:
+## Minimal usage
+```ts
+import { createAgent, send, compose, withSystem } from 'functional-agent-sdk';
+import { createOpenAIGenerate } from 'functional-agent-sdk/openai';
 
-```js
-const myMiddleware = (next) => async (messages, extra) => {
-  // do something before
-  const result = await next(messages, extra);
-  // mutate / side-effects after
-  return result;
-};
+const agent = compose(withSystem('You are helpful.'))(
+  createAgent({ modelGenerate: createOpenAIGenerate({ model: 'gpt-4o-mini' }) })
+);
+
+const out = await send(agent, 'Hello');
+console.log(out.messages.at(-1)?.content);
 ```
-
-Chain as many as you like!
